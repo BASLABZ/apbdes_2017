@@ -1,0 +1,1 @@
+<a href="<?php echo base_url('daskum/tambah') ?>" class="btn btn-success bd-rad-0">tambah</a>

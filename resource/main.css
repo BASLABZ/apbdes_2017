@@ -1,0 +1,41 @@
+.w-0 {width: 0px;}
+.w-100p {width: 100%;}.w-max-100p {max-width: 100%;}
+.w-50p {width: 50%;}
+.w-40p {width: 40%;}.w-max-40p {max-width: 40%;}
+.w-30p {width: 30%;}
+.w-20p {width: 20%;}
+.w-15p {width: 15%;}
+.w-10p {width: 10%;}
+.w-5p {width: 5%;}
+
+.pd-0 {padding: 0px;}
+.pd-6 {padding: 6px;}
+.pd-18 {padding: 18px;}
+.pd-y-18 {padding-top: 18px;padding-bottom: 18px;}
+.pd-x-l-0 {padding-left: 0px;}
+
+.mg-0 {margin: 0px;}
+.mg-y-t-0 {margin-top: 0px;}
+.mg-y-b-0 {margin-bottom: 0px;}
+.mg-t-0 {margin-top: 0px;}
+.mg-b-0 {margin-bottom: 0px;}
+
+.bd-w-0 {border-width: 0px;}
+.bd-rad-0 {border-radius: 0px;}.bd-rad-0-force {border-radius: 0px !important;}
+
+/*yudi add*/
+/* di ".bodycontainer"nya kasih "tambahan" class="mg-0 w-100p" */
+.bodycontainer { max-height: 250px; width: 100%; margin: 0; overflow-y: auto; }
+/* mending di <table>nya kasih class="mg-0 pd-0" */
+.table-scrollable { margin: 0; padding: 0; }
+
+.input-fake {
+	text-align: right;
+	background-color: transparent;
+	border: none;
+	display: inline-block;
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent;
+	min-width: 100px;
+}

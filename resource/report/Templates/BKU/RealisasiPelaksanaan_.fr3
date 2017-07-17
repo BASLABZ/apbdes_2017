@@ -1,0 +1,135 @@
+var kepaladesa,nipkepala,bendahara,nipbendahara:string;
+procedure Page1OnBeforePrint(Sender: TfrxComponent);
+begin
+    kepaladesa:=<nama_pejabat>;
+    nipkepala:=<nip_pejabat>;
+    bendahara:=<nama_bendahara>;
+    nipbendahara:=<nip_bendahara>;
+
+    QryPemda.close;
+    QryPemda.sql.text:='select * from settingtahun where tahun='+<tahun>+' ';
+    QryPemda.open;        
+    
+    QryDesa.Close;                                
+    QryDesa.SQL.Text:='select * from master_organisasi where tahun='+<tahun>+' and kodeurusan='+<kodeurusan>+' and kodesuburusan='+<kodesuburusan>+' and kodeorganisasi="'+<kodeorganisasi>+'" and kodedesa="'+<kodedesa>+'"';
+    QryDesa.Open;
+
+    QryLra.Close;                                
+    QryLra.SQL.Text:='select * from REPORT_LRA ('+<tahun>+','+<kodeurusan>+','+<kodesuburusan>+',"'+<kodeorganisasi>+'","'+<kodedesa>+'","01-jan-2017","30-jun-2017")';
+    QryLra.Open;        
+            
+end;
+
+procedure Memo25OnBeforePrint(Sender: TfrxComponent);
+begin
+    if(<QryLra."kodeakun">=0)then
+    begin
+       memo23.text:='';
+       memo24.text:='';
+       memo25.text:='';
+       memo17.text:='';
+       memo19.text:='';
+       memo20.text:='';
+       memo21.text:='';
+       memo22.text:='';
+    end else if(<QryLra."kodeakun">=4)then
+    begin
+       memo23.text:='';
+       memo24.text:='';
+       memo25.text:='';
+       memo17.text:=''; 
+    end else if(<QryLra."kodeakun">=5)then
+    begin
+       memo23.text:='';
+       memo24.text:='';
+       memo25.text:='';
+       memo17.text:='';
+    end else if(<QryLra."kodeakun">=6)then
+    begin
+       memo23.text:='';
+       memo24.text:='';
+       memo25.text:='';
+       memo17.text:='';
+    end;               
+    //isbold                           
+    if (<QryLra."isbold">=3) then
+    begin
+       memo23.text:='';
+       memo24.text:='';
+       memo25.text:='';           
+       memo17.Font.Style:=fsbold;                       
+       memo23.Font.Style:=fsbold;      
+       memo24.Font.Style:=fsbold;   
+       memo25.Font.Style:=fsbold;                       
+       memo18.Font.Style:=fsbold;   
+       memo19.Font.Style:=fsbold;   
+       memo20.Font.Style:=fsbold;   
+       memo21.Font.Style:=fsbold;   
+       memo22.Font.Style:=fsbold;   
+    end else        
+    if (<QryLra."isbold">=2) then
+    begin    
+       memo24.text:='';
+       memo25.text:='';
+       memo17.Font.Style:=fsbold;                       
+       memo23.Font.Style:=fsbold;      
+       memo24.Font.Style:=fsbold;   
+       memo25.Font.Style:=fsbold;                       
+       memo18.Font.Style:=fsbold;   
+       memo19.Font.Style:=fsbold;   
+       memo20.Font.Style:=fsbold;   
+       memo21.Font.Style:=fsbold;   
+       memo22.Font.Style:=fsbold;           
+    end else        
+    if (<QryLra."isbold">=1) then
+    begin    
+       memo25.text:='';
+       memo17.Font.Style:=0;                       
+       memo23.Font.Style:=0;      
+       memo24.Font.Style:=0;   
+       memo25.Font.Style:=0;           
+       memo18.Font.Style:=fsitalic;   
+       memo19.Font.Style:=fsitalic;   
+       memo20.Font.Style:=fsitalic;   
+       memo21.Font.Style:=fsitalic;   
+       memo22.Font.Style:=fsitalic;           
+    end else
+    if (<QryLra."isbold">=0) then
+    begin    
+       memo17.Font.Style:=0;                       
+       memo23.Font.Style:=0;      
+       memo24.Font.Style:=0;   
+       memo25.Font.Style:=0;                       
+       memo18.Font.Style:=0;   
+       memo19.Font.Style:=0;   
+       memo20.Font.Style:=0;   
+       memo21.Font.Style:=0;   
+       memo22.Font.Style:=0;           
+    end;
+
+    if (QryLra.IsEmpty = false) then 
+    begin
+       masterdata2.visible:=false;
+    end else
+    masterdata2.visible:=true;        
+end;    
+
+var F: TIniFile;
+    PathDB : String;
+    UName,Pwd : String;
+      
+begin            
+   F := TIniFile.Create(ExtractFilePath(Application.ExeName)+'\konfig.ini');
+   try
+     PathDB := F.ReadString('ReportServer','PathDB','');
+     UName := F.ReadString('ReportServer','UName','');
+     Pwd := F.ReadString('ReportServer','Pwd','');          
+   finally
+     F.Free;
+   end;             
+   IBXDatabase1.DatabaseName := PathDB;
+   IBXDatabase1.Params.Add('user_name='+UName);                          
+   IBXDatabase1.Params.Add('password='+Pwd);          
+   IBXDatabase1.Connected := True;             
+     
+end.

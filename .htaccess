@@ -1,0 +1,46 @@
+# test commit untuk update git di server 22
+# apakah bisa melakukan manipulasi url?
+<IfModule mod_rewrite.c>
+	# Turn on URL rewriting
+	RewriteEngine On
+
+	# If your website begins from a folder e.g localhost/my_project then 
+	# you have to change it to: RewriteBase /my_project/
+	# If your site begins from the root e.g. example.local/ then
+	# let it as it is
+	RewriteBase /apbdes_2017
+
+	# Protect application and system files from being viewed when the index.php is missing
+	RewriteCond $1 ^(application|system|private|logs)
+
+	# Rewrite to index.php/access_denied/URL
+	RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]
+
+	# Allow these directories and files to be displayed directly:
+	RewriteCond $1 ^(debug\.php|index\.php|robots\.txt|favicon\.ico|public|resource)
+
+	# No rewriting
+	RewriteRule ^(.*)$ - [PT,L]
+
+	# no ending slash
+	RewriteRule ^(.*)/$ $1 [L,R=301]
+
+	# Rewrite to index.php/URL
+	RewriteRule ^(.*)$ index.php/$1 [PT,L]
+
+	RewriteCond %{REQUEST_URI} /(svc|ajx)/
+	# apakah bisa manipulasi header?
+	<IfModule mod_headers.c>
+		# /svc/ atau /ajx_[misal: get_user]/ (untuk json) 1800 = 0.5 jam
+		Header set Cache-Control "max-age=1800, private, must-revalidate"
+	</IfModule>
+
+	<FilesMatch "\.(?i:gif|jpe?g|png|ico|css|js|swf|woff|woff2)$">
+		# apakah bisa manipulasi header?
+		<IfModule mod_headers.c>
+			# 86400 = 24 jam (se-hari)
+			Header set Cache-Control "max-age=86400, public"
+		</IfModule>
+	</FilesMatch>
+
+</IfModule>

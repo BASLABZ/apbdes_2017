@@ -1,0 +1,4 @@
+1. security use XSS
+2. CSRF Prevention
+3. Active Record
+4. encrypt And Decrypt

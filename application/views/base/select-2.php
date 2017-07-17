@@ -1,0 +1,1 @@
+<style scoped>[class^='select2'] { border-radius: 0px !important; }</style>

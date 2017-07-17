@@ -27,7 +27,7 @@ date_default_timezone_set('Asia/Jakarta');
 
 // supaya, tidak perlu edat-edit
 $host = $_SERVER['HTTP_HOST'];
-$path = 'apbdes_versi2';
+$path = 'apbdes_2017';
 if (preg_match('/nabire\.org/', $host)) {
 	$path = 'sikdes';
 }
